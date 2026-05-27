@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<script>(function(){try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Products · Gosarvam Global LLP</title>
+<meta name="description" content="Explore the full Gosarvam Global product portfolio — Assam tea, jute products, fox nuts, jaggery, moringa powder, cow dung eco solutions, and food essentials. Export-grade, globally trusted." />
+<meta property="og:title" content="Products · Gosarvam Global LLP" />
+<meta property="og:description" content="Premium Indian agri & eco products. Export-grade. Globally shipped." />
+<meta name="theme-color" content="#fdfbf6" />
+<link rel="canonical" href="https://gosarvamglobal.com/products.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/main.css" />
+<style>
+  .filter-bar {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items:center;
+    padding: 14px; border-radius: 999px; background: var(--glass-strong);
+    border: 1px solid var(--line); backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-1); margin-bottom: 40px;
+  }
+  .filter-bar button {
+    padding: 10px 18px; border-radius: 999px; font-size: 13px;
+    color: var(--ink-soft); transition: background .3s, color .3s;
+  }
+  .filter-bar button.active, .filter-bar button:hover { background: var(--ink); color: var(--ivory); }
+  .filter-bar .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mute); margin: 0 8px 0 12px; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="js/partials.js" defer></script>
+<script src="js/main.js" defer></script>
+</head>
+<body data-page="products">
+
+<header class="page-banner">
+  <div class="wrap">
+    <div class="crumbs"><a href="index.html">Home</a> · Products</div>
+    <h1 class="r-up">The full <span class="italic-serif">portfolio</span> — sourced, graded, ready to ship.</h1>
+    <p class="lead r-up">Seven flagship categories, each backed by traceable sourcing, multi-stage quality control, and globally compliant documentation.</p>
+  </div>
+</header>
+
+<section style="padding-top: 0;">
+  <div class="wrap">
+
+    <div class="filter-bar r-fade">
+      <span class="lbl">Filter</span>
+      <button class="active" data-cat="all">All</button>
+      <button data-cat="beverage">Beverages</button>
+      <button data-cat="superfood">Superfoods</button>
+      <button data-cat="sweetener">Sweeteners</button>
+      <button data-cat="eco">Eco / Fibre</button>
+      <button data-cat="pantry">Pantry</button>
+    </div>
+
+    <div class="products-grid" id="pg">
+      <a href="product-detail.html?p=assam-tea" class="product-card span6" data-cat="beverage">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=1100&q=85')"></div>
+        <div class="veil"></div>
+        <div class="arr"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13 13 3M6 3h7v7"/></svg></div>
+        <div class="meta"><div class="tag">01 · Premium Tea</div><h3>Assam Orthodox Tea</h3><p>Single-origin, hand-plucked, full-bodied black tea — the gold standard of breakfast brews.</p></div>
+      </a>
+      <a href="product-detail.html?p=jute" class="product-card" data-cat="eco">
+        <div class="img" style="background-image:url('https://images.pexels.com/photos/461940/pexels-photo-461940.jpeg?auto=compress&cs=tinysrgb&w=900')"></div>
+        <div class="veil"></div>
+        <div class="arr"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13 13 3M6 3h7v7"/></svg></div>
+        <div class="meta"><div class="tag">02 · Eco Fibre</div><h3>Jute Products</h3><p>Bags, sacks, rugs, and yarn — biodegradable, breathable, durable.</p></div>
+      </a>
+      <a href="product-detail.html?p=fox-nuts" class="product-card" data-cat="superfood">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1559656914-a30970c1affd?w=900&q=85&auto=format&fit=crop')"></div>
+        <div class="veil"></div>
+        <div class="arr"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13 13 3M6 3h7v7"/></svg></div>
+        <div class="meta"><div class="tag">03 · Super-snack</div><h3>Fox Nuts (Makhana)</h3><p>Roasted, salted, flavored & raw — gluten-free, protein-rich, low-calorie.</p></div>
+      </a>
+      <a href="product-detail.html?p=jaggery" class="product-card" data-cat="sweetener">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1610725664285-7c57e6eeac3f?w=900&q=85')"></div>
+        <div class="veil"></div>
+        <div class="arr"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13 13 3M6 3h7v7"/></svg></div>
+        <div class="meta"><div class="tag">04 · Natural Sweetener</div><h3>Organic Jaggery</h3><p>Cubes, powder, liquid — chemical-free, mineral-rich, traditional.</p></div>
+      </a>
+      <a href="product-detail.html?p=moringa" class="product-card span6" data-cat="superfood">
+        <div class="img" style="background-image:url('https://images.pexels.com/photos/1267325/pexels-photo-1267325.jpeg?auto=compress&cs=tinysrgb&w=1100')"></div>
+        <div class="veil"></div>
+        <div class="arr"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13 13 3M6 3h7v7"/></svg></div>
+        <div class="meta"><div class="tag">05 · Superfood</div><h3>Moringa Powder</h3><p>Sun-dried, shade-cured, stone-milled — the world's most complete plant nutrient.</p></div>
+      </a>
+      <a href="product-detail.html?p=cow-dung" class="product-card" data-cat="eco">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=85')"></div>
+        <div class="veil"></div>
+        <div class="arr"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13 13 3M6 3h7v7"/></svg></div>
+        <div class="meta"><div class="tag">06 · Sacred Eco</div><h3>Cow Dung Eco Solutions</h3><p>Vedic incense, organic manure, eco-pots, dhoop cakes — ancestral materials.</p></div>
+      </a>
+      <a href="product-detail.html?p=essentials" class="product-card" data-cat="pantry">
+        <div class="img" style="background-image:url('https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=900&q=85')"></div>
+        <div class="veil"></div>
+        <div class="arr"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13 13 3M6 3h7v7"/></svg></div>
+        <div class="meta"><div class="tag">07 · Pantry</div><h3>Food Essentials</h3><p>Pulses, spices, grains, oils — every staple, export-graded and uniformly packed.</p></div>
+      </a>
+    </div>
+
+    <div class="text-center mt-l">
+      <a href="catalogue.html" class="btn btn-primary btn-magnetic">Download full PDF catalogue
+        <svg class="btn-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v10M3 8l5 5 5-5"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2 class="r-up">Don't see what you're <i>looking for?</i></h2>
+        <p class="lead r-up mt-s">We curate custom export consignments for private labels, large distributors, and HoReCa chains. Tell us what you need.</p>
+      </div>
+      <div class="row">
+        <a href="rfq.html" class="btn btn-gold btn-magnetic">Custom RFQ</a>
+        <a href="contact.html" class="btn btn-ghost btn-magnetic">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Lightweight filter — no library needed
+  document.addEventListener('DOMContentLoaded', () => {
+    const bar = document.querySelector('.filter-bar');
+    if (!bar) return;
+    bar.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      [...bar.querySelectorAll('button')].forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      const cat = b.dataset.cat;
+      document.querySelectorAll('#pg .product-card').forEach(c => {
+        const show = (cat === 'all' || c.dataset.cat === cat);
+        c.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

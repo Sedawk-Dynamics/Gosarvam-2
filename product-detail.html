@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<script>(function(){try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="pdTitle">Product · Gosarvam Global LLP</title>
+<meta name="description" id="pdDesc" content="Premium Indian export product — Gosarvam Global LLP." />
+<meta name="theme-color" content="#fdfbf6" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/main.css" />
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="js/partials.js" defer></script>
+<script src="js/main.js" defer></script>
+</head>
+<body data-page="products">
+
+<header class="page-banner" style="padding-bottom:50px;">
+  <div class="wrap">
+    <div class="crumbs"><a href="index.html">Home</a> · <a href="products.html">Products</a> · <span id="crumbName">Product</span></div>
+    <span class="tag-pill mt-m" id="pdCategory">Category</span>
+    <h1 class="r-up" id="pdName">Loading…</h1>
+    <p class="lead r-up" id="pdTagline"></p>
+  </div>
+</header>
+
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="pd-grid">
+      <div class="pd-hero r-clip" id="pdHero">
+        <span class="ribbon">Export Grade</span>
+      </div>
+      <div>
+        <div class="section-tag"><span class="dot"></span><span>Sourcing &amp; Story</span></div>
+        <h3 class="r-up" id="pdStoryTitle"></h3>
+        <p class="lead r-up mt-s" id="pdStory"></p>
+
+        <div class="pd-spec">
+          <div class="row"><span>Origin</span><b id="sp1"></b></div>
+          <div class="row"><span>Grades</span><b id="sp2"></b></div>
+          <div class="row"><span>Packaging</span><b id="sp3"></b></div>
+          <div class="row"><span>MOQ</span><b id="sp4"></b></div>
+          <div class="row"><span>HS Code</span><b id="sp5"></b></div>
+          <div class="row"><span>Shelf Life</span><b id="sp6"></b></div>
+        </div>
+
+        <div class="hero-cta-row mt-l">
+          <a href="rfq.html" class="btn btn-primary btn-magnetic">Request Quotation
+            <svg class="btn-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13 13 3M6 3h7v7"/></svg>
+          </a>
+          <a href="catalogue.html" class="btn btn-ghost btn-magnetic">Download Spec Sheet</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- USP / Benefits -->
+    <div class="mt-l" style="margin-top:100px;">
+      <div class="section-tag"><span class="dot"></span><span>Why this product</span></div>
+      <h2 class="r-up" style="max-width:18ch;">Unique selling <span class="italic-serif">propositions.</span></h2>
+      <div class="values mt-l" id="pdUsps"></div>
+    </div>
+
+    <!-- Benefits & export countries -->
+    <div class="strip mt-l">
+      <div class="strip-text">
+        <span class="num">BENEFITS</span>
+        <h3 class="r-up" id="benTitle"></h3>
+        <ul class="list" id="benList"></ul>
+      </div>
+      <div class="strip-image r-clip" id="benImage">
+        <span class="tag">Trusted globally</span>
+      </div>
+    </div>
+
+    <!-- Markets -->
+    <div class="mt-l" style="margin-top:80px;">
+      <div class="section-tag"><span class="dot"></span><span>Export Markets</span></div>
+      <h3 class="r-up" style="max-width:22ch; margin-bottom:24px;">Currently shipping to —</h3>
+      <div class="world-list" id="pdMarkets"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2 class="r-up">Ready to <i>order?</i></h2>
+        <p class="lead r-up mt-s">Share your volumes, port, and packaging requirement — we'll respond with a transparent proposal within 24 business hours.</p>
+      </div>
+      <div class="row">
+        <a href="rfq.html" class="btn btn-gold btn-magnetic">Request Quotation</a>
+        <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="btn btn-ghost btn-magnetic">WhatsApp Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Product data
+  const PRODUCTS = {
+    'assam-tea': {
+      name: 'Assam Orthodox Tea',
+      cat: '01 · Premium Tea',
+      tag: 'Single-origin orthodox black tea, hand-plucked, full-bodied, world-renowned.',
+      hero: 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=1300&q=85',
+      story: 'Plucked at dawn from the legacy estates of Upper Assam, our orthodox black tea carries the unmistakable malty character that has made Assam the most celebrated tea region on earth.',
+      sp: ['Assam, India','SFTGFOP1, FTGFOP1, TGFOP','Bulk · 25/50 kg · Retail cartons','500 kg','0902.30','24 months'],
+      usps: [
+        ['Single estate', 'Full traceability — one estate per consignment.'],
+        ['Hand-plucked', 'Only two leaves and a bud, twice daily.'],
+        ['Orthodox process', 'Withered, rolled, oxidised, fired traditionally.'],
+      ],
+      benefits: {
+        title: 'A cup that travels well.',
+        list: [
+          'Rich in flavonoids and natural antioxidants.',
+          'Bright copper liquor, malty body, robust finish.',
+          'Stable shelf life — 24 months from packing date.',
+          'Custom blends and private labeling available.'
+        ],
+        image: 'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=1100&q=85'
+      },
+      markets: ['🇺🇸 USA','🇬🇧 UK','🇩🇪 Germany','🇦🇪 UAE','🇯🇵 Japan','🇨🇦 Canada','🇦🇺 Australia','🇸🇬 Singapore']
+    },
+    'jute': {
+      name: 'Jute Products',
+      cat: '02 · Eco Fibre',
+      tag: 'The golden fibre of Bengal — biodegradable, breathable, durable.',
+      hero: 'https://images.pexels.com/photos/461940/pexels-photo-461940.jpeg?auto=compress&cs=tinysrgb&w=1300',
+      story: 'Jute is one of the most sustainable natural fibres on the planet. Our partner mills in West Bengal supply premium-grade hessian, sacks, bags, rugs, and decorative jute — built for retail, agriculture, and industry alike.',
+      sp: ['West Bengal, India','BTC, BTD, BTRC grades','Pressed bales · Custom retail','1000 pcs / 5 tonnes','5310 / 6305','Indefinite (dry)'],
+      usps: [
+        ['100% biodegradable', 'Returns to soil naturally within months.'],
+        ['Custom branding', 'Printed bags and sacks to spec.'],
+        ['Industrial strength', 'High tensile, breathable for produce storage.'],
+      ],
+      benefits: {
+        title: 'The fabric of a sustainable future.',
+        list: [
+          'Replaces plastic packaging across retail and agri.',
+          'Naturally breathable — extends shelf life of stored grain.',
+          'Ideal for premium retail bags, hampers and gifting.',
+          'Custom print, weave, and finish available.'
+        ],
+        image: 'https://images.pexels.com/photos/461940/pexels-photo-461940.jpeg?auto=compress&cs=tinysrgb&w=1100'
+      },
+      markets: ['🇺🇸 USA','🇬🇧 UK','🇫🇷 France','🇩🇪 Germany','🇦🇺 Australia','🇨🇦 Canada','🇸🇦 KSA','🇳🇱 Netherlands']
+    },
+    'fox-nuts': {
+      name: 'Fox Nuts (Makhana)',
+      cat: '03 · Super-snack',
+      tag: 'Roasted lotus seeds — protein-rich, gluten-free, globally loved.',
+      hero: 'https://images.unsplash.com/photo-1559656914-a30970c1affd?w=1300&q=85&auto=format&fit=crop',
+      story: 'Sourced from the famed Mithila region of Bihar — the global home of premium makhana. Hand-popped using traditional methods, then sorted, graded, and packed in food-safe pouches and bulk cartons.',
+      sp: ['Bihar (Mithila), India','Phool, 4-suta, 5-suta','Pouches 50g–1kg · Cartons 5/10 kg','500 kg','1106.30','12 months'],
+      usps: [
+        ['High protein', '9.7g per 100g — naturally satiating.'],
+        ['Gluten-free', 'Allergen-free, kid-friendly.'],
+        ['Hand-popped', 'Traditional roasting for crisp texture.'],
+      ],
+      benefits: {
+        title: "The world's smartest snack.",
+        list: [
+          'Low calorie, low glycemic — diabetic-friendly.',
+          'Rich in magnesium, potassium, and antioxidants.',
+          'Available in salted, peri-peri, cheese, and raw.',
+          'Private-label and white-label ready.'
+        ],
+        image: 'https://images.unsplash.com/photo-1565299715199-866c917206bb?w=1100&q=85'
+      },
+      markets: ['🇺🇸 USA','🇬🇧 UK','🇦🇪 UAE','🇩🇪 Germany','🇸🇬 Singapore','🇦🇺 Australia','🇯🇵 Japan','🇨🇦 Canada']
+    },
+    'jaggery': {
+      name: 'Organic Jaggery',
+      cat: '04 · Natural Sweetener',
+      tag: 'Unrefined sugarcane jaggery — mineral-rich, traditional, chemical-free.',
+      hero: 'https://images.unsplash.com/photo-1610725664285-7c57e6eeac3f?w=1300&q=85',
+      story: 'Produced in small-batch open-pan mills across Maharashtra and Karnataka. No chemicals, no bleaching — just slow-cooked sugarcane juice from selected varieties, hand-poured into traditional moulds.',
+      sp: ['Maharashtra · Karnataka, India','Cube, Powder, Liquid, Granular','1kg pouches · 25kg cartons','1 tonne','1701.13','18 months'],
+      usps: [
+        ['Chemical-free', 'No sulphur, no bleaching agents.'],
+        ['Mineral-rich', 'Naturally contains iron, magnesium, potassium.'],
+        ['Multiple formats', 'Cube, powder, liquid, granules.'],
+      ],
+      benefits: {
+        title: 'A sweetener with a conscience.',
+        list: [
+          'Lower glycemic index than refined sugar.',
+          'Rich, caramel flavour for premium confectionery.',
+          'Suitable for ethnic, organic, and clean-label brands.',
+          'Liquid jaggery ideal for beverage manufacturers.'
+        ],
+        image: 'https://images.unsplash.com/photo-1623238913973-21e45cced554?w=1100&q=85'
+      },
+      markets: ['🇺🇸 USA','🇬🇧 UK','🇦🇪 UAE','🇨🇦 Canada','🇩🇪 Germany','🇦🇺 Australia','🇸🇬 Singapore']
+    },
+    'moringa': {
+      name: 'Moringa Powder',
+      cat: '05 · Superfood',
+      tag: 'The miracle leaf — sun-dried, stone-milled, complete plant nutrition.',
+      hero: 'https://images.pexels.com/photos/1267325/pexels-photo-1267325.jpeg?auto=compress&cs=tinysrgb&w=1300',
+      story: 'Cultivated across Tamil Nadu and Andhra Pradesh, our moringa is dried in low-temperature solar tunnels to preserve every nutrient, then stone-milled into ultra-fine powder. USDA-organic and EU-organic certified lots available.',
+      sp: ['Tamil Nadu · Andhra Pradesh','Food grade · Pharma grade','Foil pouches 100g–1kg · Drums 25 kg','100 kg','1404.90','18 months'],
+      usps: [
+        ['90+ nutrients', 'Vitamins, minerals, antioxidants, amino acids.'],
+        ['Low-temp dried', 'Preserves chlorophyll & nutrient density.'],
+        ['Certified organic', 'USDA / EU / India NPOP options.'],
+      ],
+      benefits: {
+        title: "Nature's most complete plant food.",
+        list: [
+          '7x the vitamin C of oranges, 4x calcium of milk.',
+          'Anti-inflammatory and immunity-supporting.',
+          'Used in smoothies, capsules, energy bars, cosmetics.',
+          'Available as powder, capsules, leaves, seeds, oil.'
+        ],
+        image: 'https://images.unsplash.com/photo-1606756790138-261d2b21cd75?w=1100&q=85'
+      },
+      markets: ['🇺🇸 USA','🇬🇧 UK','🇩🇪 Germany','🇫🇷 France','🇨🇦 Canada','🇯🇵 Japan','🇦🇺 Australia','🇰🇷 South Korea']
+    },
+    'cow-dung': {
+      name: 'Cow Dung Eco Solutions',
+      cat: '06 · Sacred Eco',
+      tag: 'Vedic incense, organic manure, eco-pots — ancestral materials reimagined.',
+      hero: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1300&q=85',
+      story: 'In partnership with desi-cow gaushalas across Gujarat and Rajasthan, we craft a range of sacred eco products — Vedic dhoop cones, panchagavya incense, organic farm manure, biodegradable pots, and dung cakes. Every batch is sun-dried, sieved, and hand-shaped.',
+      sp: ['Gujarat · Rajasthan, India','Incense · Manure · Pots · Cakes','Boxes · Sacks · Cartons','1000 pcs / 1 tonne','3307.41 / 3101','24 months'],
+      usps: [
+        ['Sacred sourcing', 'Only from indigenous (desi) breed cows.'],
+        ['100% natural', 'No synthetic binders or fragrances.'],
+        ['Multi-use', 'Spiritual, agricultural, and lifestyle.'],
+      ],
+      benefits: {
+        title: 'Where tradition meets ecology.',
+        list: [
+          'Natural air purification with anti-microbial benefits.',
+          'Rich organic manure for regenerative agriculture.',
+          'Biodegradable pots that nourish soil as they decompose.',
+          'Featured in temples, wellness retreats, and farms worldwide.'
+        ],
+        image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1100&q=85&auto=format&fit=crop'
+      },
+      markets: ['🇺🇸 USA','🇬🇧 UK','🇦🇪 UAE','🇨🇦 Canada','🇦🇺 Australia','🇸🇬 Singapore','🇩🇪 Germany']
+    },
+    'essentials': {
+      name: 'Food Essentials',
+      cat: '07 · Pantry',
+      tag: 'Pulses, spices, grains, oils — every Indian staple, export-graded.',
+      hero: 'https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=1300&q=85',
+      story: 'A curated portfolio of Indian pantry staples — basmati rice, toor and chana dal, whole and ground spices, mustard and groundnut oils. Every consignment carries CoA, phyto, and origin certificates.',
+      sp: ['Multi-state, India','Premium · Standard · Steam','Retail pouches · 25/50 kg sacks','5 tonnes','Various (per item)','12 months'],
+      usps: [
+        ['Wide portfolio', 'Pulses, spices, grains, oils — under one roof.'],
+        ['Export-graded', 'Cleaned, sorted, fumigation-ready.'],
+        ['Custom packaging', 'Private label, multilingual, retail-ready.'],
+      ],
+      benefits: {
+        title: 'One supplier — every staple.',
+        list: [
+          'Streamline procurement under one trusted exporter.',
+          'Consistent quality across long-running SKUs.',
+          'Mixed-container loading for distributor flexibility.',
+          'In-house QC lab with AGMARK / FSSAI standards.'
+        ],
+        image: 'https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?w=1100&q=85'
+      },
+      markets: ['🇺🇸 USA','🇬🇧 UK','🇦🇪 UAE','🇨🇦 Canada','🇦🇺 Australia','🇸🇬 Singapore','🇯🇵 Japan','🇰🇷 South Korea']
+    }
+  };
+
+  (function render(){
+    const params = new URLSearchParams(location.search);
+    const key = params.get('p') || 'assam-tea';
+    const p = PRODUCTS[key] || PRODUCTS['assam-tea'];
+
+    document.title = p.name + ' · Gosarvam Global LLP';
+    document.getElementById('pdDesc').setAttribute('content', p.tag);
+    document.getElementById('pdName').textContent = p.name;
+    document.getElementById('crumbName').textContent = p.name;
+    document.getElementById('pdCategory').textContent = p.cat;
+    document.getElementById('pdTagline').textContent = p.tag;
+    document.getElementById('pdHero').style.backgroundImage = `url('${p.hero}')`;
+    document.getElementById('pdStoryTitle').textContent = 'Sourced where it belongs.';
+    document.getElementById('pdStory').textContent = p.story;
+    ['sp1','sp2','sp3','sp4','sp5','sp6'].forEach((id,i)=>document.getElementById(id).textContent = p.sp[i]);
+
+    document.getElementById('pdUsps').innerHTML = p.usps.map((u,i)=>`
+      <div class="value-card r-up">
+        <span class="num">${String(i+1).padStart(2,'0')}</span>
+        <h4>${u[0]}</h4>
+        <p>${u[1]}</p>
+      </div>`).join('');
+
+    document.getElementById('benTitle').textContent = p.benefits.title;
+    document.getElementById('benList').innerHTML = p.benefits.list.map(b=>`<li>${b}</li>`).join('');
+    document.getElementById('benImage').style.backgroundImage = `url('${p.benefits.image}')`;
+    document.getElementById('benImage').style.backgroundSize = 'cover';
+    document.getElementById('benImage').style.backgroundPosition = 'center';
+
+    document.getElementById('pdMarkets').innerHTML = p.markets.map(m=>{
+      const parts = m.split(' ');
+      return `<div class="world-pill"><span class="flag">${parts[0]}</span>${parts.slice(1).join(' ')}</div>`;
+    }).join('');
+  })();
+</script>
+
+</body>
+</html>
