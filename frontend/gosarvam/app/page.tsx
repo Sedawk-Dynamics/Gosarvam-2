@@ -78,7 +78,6 @@ export default function Home() {
           {/* Hero video — nature/tea garden footage */}
           <video
             autoPlay muted loop playsInline
-            poster="/images/assam-tea.png"
             style={{
               position:'absolute', inset:0, width:'100%', height:'100%',
               objectFit:'cover', objectPosition:'center',
