@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "path";
 
 const nextConfig: NextConfig = {
   images: {
@@ -8,9 +7,6 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.pexels.com' },
       { protocol: 'https', hostname: 'videos.pexels.com' },
     ],
-  },
-  turbopack: {
-    root: path.join(__dirname),
   },
 };
 
