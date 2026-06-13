@@ -1,0 +1,19 @@
+{
+  "rfqs": [
+    {
+      "id": 1,
+      "full_name": "Test Buyer",
+      "company": "Test Co",
+      "email": "test@test.com",
+      "phone": "+1234567890",
+      "country": "Germany",
+      "products": "Assam Tea, Fox Nuts",
+      "shipping_mode": "FCL (Full container)",
+      "incoterm": "FOB",
+      "payment_terms": "TT - 30/70",
+      "order_frequency": "Monthly",
+      "created_at": "2026-06-12T05:30:41.847Z"
+    }
+  ],
+  "contacts": []
+}
