@@ -1,10 +1,15 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
-import WorldMap from '@/components/canvas/WorldMap';
-import FloatingGeo from '@/components/canvas/FloatingGeo';
-import FlowLines from '@/components/canvas/FlowLines';
-import MorphGlobe from '@/components/canvas/MorphGlobe';
+import dynamic from 'next/dynamic';
+
+// All canvas/heavy components are below the fold — lazy load them to keep
+// the initial JS bundle small and avoid parsing Three.js / react-simple-maps on load.
+const FloatingGeo    = dynamic(() => import('@/components/canvas/FloatingGeo'),    { ssr: false });
+const WorldMap       = dynamic(() => import('@/components/canvas/WorldMap'),       { ssr: false });
+const FlowLines      = dynamic(() => import('@/components/canvas/FlowLines'),      { ssr: false });
+const MorphGlobe     = dynamic(() => import('@/components/canvas/MorphGlobe'),     { ssr: false });
+const ProductCoverflow = dynamic(() => import('@/components/ProductCoverflow'),     { ssr: false });
 
 const PRODUCTS = [
   {
@@ -78,6 +83,7 @@ export default function Home() {
           {/* Hero video — nature/tea garden footage */}
           <video
             autoPlay muted loop playsInline
+            preload="metadata"
             style={{
               position:'absolute', inset:0, width:'100%', height:'100%',
               objectFit:'cover', objectPosition:'center',
@@ -93,7 +99,7 @@ export default function Home() {
           <div className="hero-grid">
             <div>
               <div className="eyebrow r-fade" style={{color:'rgba(255,255,255,0.5)',justifyContent:'center',marginBottom:'28px'}}>
-                Indian Export House &nbsp;·&nbsp; Est. 2026
+                Indian Export House &nbsp;·&nbsp; Est. 2023
               </div>
               <h1 className="hero-title">
                 <span className="line"><span className="word">Moving</span></span>
@@ -189,12 +195,13 @@ export default function Home() {
             </div>
             <div className="story-image r-fade">
               <img
-                src="/images/assam-tea.png"
-                alt="Gosarvam Global — Indian agri export"
+                src="/images/food-essentials-heritage.png"
+                alt="Gosarvam Global — Indian agri heritage"
+                loading="lazy"
+                decoding="async"
               />
               <div className="cap">
-                <span>Est. 2026</span>
-                <span>Assam, India</span>
+                <span>Est. 2023</span>
               </div>
             </div>
           </div>
@@ -272,35 +279,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── PRODUCT GRID PREVIEW ─────────────────────────────── */}
-      <section style={{paddingTop:'0',paddingBottom:'clamp(80px,10vw,140px)',background:'var(--bg-alt)'}}>
-        <div className="wrap">
-          <div className="products-grid">
-            {[
-              {slug:'assam-tea',span:'span6',grad:'green',img:'/images/assam-tea.png',tag:'01 · Premium Tea',name:'Assam Orthodox Tea',desc:'Hand-plucked black tea from the misty estates of Upper Assam.'},
-              {slug:'jute',span:'',grad:'earth',img:'/images/jute-products.png',tag:'02 · Eco Fibre',name:'Jute Products',desc:'Biodegradable jute bags, sacks, and rugs — the golden fibre of Bengal.'},
-              {slug:'fox-nuts',span:'',grad:'cream',img:'/images/fox-nuts.png',tag:'03 · Superfood',name:'Fox Nuts (Makhana)',desc:'Hand-roasted lotus seeds — protein-rich, gluten-free, globally loved.'},
-              {slug:'jaggery',span:'',grad:'amber',img:'/images/jaggery.png',tag:'04 · Sweetener',name:'Organic Jaggery',desc:'Unrefined sugarcane jaggery — mineral-rich, chemical-free.'},
-              {slug:'moringa',span:'span6',grad:'moss',img:'/images/moringa.png',tag:'05 · Superfood',name:'Moringa Powder',desc:'The miracle leaf, sun-dried and stone-milled.'},
-              {slug:'cow-dung',span:'',grad:'earth',img:'/images/cow-dung.png',tag:'06 · Sacred Eco',name:'Eco Solutions',desc:'Vedic incense, organic manure, eco-pots — ancestral materials reimagined.'},
-              {slug:'essentials',span:'',grad:'spice',img:'/images/food-essentials.png',tag:'07 · Pantry',name:'Food Essentials',desc:'Pulses, spices, grains, oils — export-graded Indian pantry.'},
-            ].map(p => (
-              <Link key={p.slug} href={`/products/${p.slug}`} className={`product-card${p.span?' '+p.span:''}`} data-grad={p.grad}>
-                <div className="img" style={{backgroundImage:`url('${p.img}')`}} />
-                <div className="veil" />
-                <div className="arr">
-                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 13 13 3M6 3h7v7"/></svg>
-                </div>
-                <div className="meta">
-                  <div className="tag">{p.tag}</div>
-                  <h3>{p.name}</h3>
-                  <p>{p.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── PRODUCT COVERFLOW ────────────────────────────────── */}
+      <ProductCoverflow />
 
       {/* ── THE JOURNEY ──────────────────────────────────────── */}
       <section style={{background:'var(--bg)', position:'relative', overflow:'hidden'}}>

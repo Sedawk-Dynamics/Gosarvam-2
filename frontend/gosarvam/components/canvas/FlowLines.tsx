@@ -47,9 +47,18 @@ export default function FlowLines() {
       (1 - t) ** 2 * p0 + 2 * (1 - t) * t * p1 + t ** 2 * p2;
 
     let animId: number;
+    let visible = false;
+    let frameCount = 0;
+
     const draw = () => {
       animId = requestAnimationFrame(draw);
+      if (!visible) return;
+      if (frameCount++ % 2 !== 0) return; // 30 fps — background decoration
+
       ctx.clearRect(0, 0, W, H);
+
+      // Set dashes once per frame, not per route
+      ctx.setLineDash([4, 8]);
 
       routes.forEach(r => {
         r.t += r.speed;
@@ -61,11 +70,10 @@ export default function FlowLines() {
         ctx.quadraticCurveTo(r.cx, r.cy, r.x2, r.y2);
         ctx.strokeStyle = `${gold}0.07)`;
         ctx.lineWidth = 1;
-        ctx.setLineDash([4, 8]);
         ctx.stroke();
-        ctx.setLineDash([]);
 
         // Draw glowing trail along the arc
+        ctx.setLineDash([]);
         const steps = 24;
         for (let i = 0; i < steps; i++) {
           const st = r.t - r.trailLen * (i / steps);
@@ -88,16 +96,20 @@ export default function FlowLines() {
         ctx.fillStyle = `${gold}0.9)`;
         ctx.fill();
 
-        // Glow ring
-        const grd = ctx.createRadialGradient(lx, ly, 0, lx, ly, r.dotSize + 8);
-        grd.addColorStop(0, `${gold}0.3)`);
-        grd.addColorStop(1, `${gold}0)`);
+        // Glow ring — simple semi-transparent circle instead of gradient (faster)
         ctx.beginPath();
         ctx.arc(lx, ly, r.dotSize + 8, 0, Math.PI * 2);
-        ctx.fillStyle = grd;
+        ctx.fillStyle = `${gold}0.12)`;
         ctx.fill();
+
+        ctx.setLineDash([4, 8]); // restore for next route's arc
       });
+
+      ctx.setLineDash([]);
     };
+
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.05 });
+    io.observe(canvas);
     draw();
 
     const onResize = () => {
@@ -105,8 +117,12 @@ export default function FlowLines() {
       canvas.width = W; canvas.height = H;
       routes.forEach((r, i) => { routes[i] = { ...makeRoute(), t: r.t }; });
     };
-    window.addEventListener('resize', onResize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', onResize); };
+    window.addEventListener('resize', onResize, { passive: true });
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', onResize);
+      io.disconnect();
+    };
   }, []);
 
   return (

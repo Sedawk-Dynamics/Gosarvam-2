@@ -3,6 +3,7 @@ import Link from 'next/link';
 const catalog: Record<string, {
   name: string; tag: string; desc: string; img: string;
   specs: [string,string][]; grades: string[]; docs: string[];
+  catalogue?: string;
 }> = {
   'assam-tea': {
     name: 'Assam Orthodox Tea',
@@ -12,6 +13,7 @@ const catalog: Record<string, {
     specs: [['Origin','Upper Assam, India'],['Harvest','March–November'],['Processing','Orthodox (whole leaf)'],['Grades','SFTGFOP1, FTGFOP, TGFOP, BOP, BP, BOPF, PF, D'],['Min. Order','1 MT per grade'],['Packaging','20 kg ply bags / chest / custom'],['Shelf Life','24 months sealed'],['Certifications','FSSAI, ISO 22000, APEDA']],
     grades: ['SFTGFOP1 (Super Fine)','FTGFOP (Fine)','TGFOP (Whole Leaf)','BOP (Broken)','BP (Broken Pekoe)','Fannings','Dust'],
     docs: ['Phytosanitary Certificate','Certificate of Origin (APEDA)','Quality Analysis Report','FSSAI Compliance'],
+    catalogue: '/catalogues/assam-tea-catalogue.pdf',
   },
   'jute': {
     name: 'Jute Products',
@@ -30,6 +32,7 @@ const catalog: Record<string, {
     specs: [['Origin','Bihar, India'],['Varieties','Plain, Roasted, Flavoured, Flour'],['Protein','~9.7g per 100g'],['Fat','~0.1g per 100g'],['Min. Order','500 kg'],['Packaging','5 kg / 10 kg / 25 kg bags; retail pouches'],['Shelf Life','12 months sealed'],['Certifications','FSSAI, Organic India, APEDA'],],
     grades: ['Suta (Extra Large — 6+ mm)','Lawa (Large — 5–6 mm)','Samanya (Medium — 4–5 mm)','Tikhi (Small)'],
     docs: ['FSSAI License','Organic Certificate','Quality Analysis Report','Phytosanitary'],
+    catalogue: '/catalogues/makhana-catalogue.pdf',
   },
   'jaggery': {
     name: 'Organic Jaggery',
@@ -66,6 +69,7 @@ const catalog: Record<string, {
     specs: [['Products','Turmeric, Cumin, Coriander, Basmati Rice, Toor Dal, Chana Dal, Mustard Oil, Coconut Oil'],['Origin','Pan-India sourcing by region'],['Grades','Export Premium / AGMARK'],['Min. Order','500 kg per SKU'],['Packaging','Retail pouch / bulk bag / IBC'],['Shelf Life','Product dependent (6–24 months)'],['Certifications','FSSAI, AGMARK, Spices Board'],],
     grades: ['Premium Export Grade','AGMARK Grade A','Organic Grade (select items)'],
     docs: ['AGMARK Certificate','Spices Board License','Phytosanitary Certificate','FSSAI License'],
+    catalogue: '/catalogues/turmeric-catalogue.pdf',
   },
 };
 
@@ -101,7 +105,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   Request Quotation
                   <svg className="btn-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 13 13 3M6 3h7v7"/></svg>
                 </Link>
-                <Link href="/catalogue" className="btn btn-ghost btn-magnetic">Download Catalogue</Link>
               </div>
 
               {/* GRADES */}
@@ -137,6 +140,78 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CATALOGUE DOWNLOAD */}
+      <section style={{background:'var(--bg-alt,#f7f4ef)'}}>
+        <div className="wrap">
+          <div className="section-tag"><span className="dot" /><span>Catalogue</span></div>
+          <h2 className="r-up" style={{maxWidth:'22ch',marginBottom:'2rem'}}>
+            Download the full <span className="italic-serif">product catalogue.</span>
+          </h2>
+          <div style={{
+            display:'flex', alignItems:'center', gap:'2rem', flexWrap:'wrap',
+            background:'var(--bg)', border:'1px solid var(--line)',
+            borderRadius:'16px', padding:'2rem 2.5rem',
+            boxShadow:'0 4px 24px rgba(0,0,0,0.06)',
+          }}>
+            {/* PDF icon */}
+            <div style={{
+              width:72, height:72, borderRadius:14, flexShrink:0,
+              background: p.catalogue
+                ? 'linear-gradient(135deg,#c05a2a,#8b2000)'
+                : 'linear-gradient(135deg,#c9a063,#8b6a2a)',
+              display:'grid', placeItems:'center',
+              boxShadow: p.catalogue
+                ? '0 8px 24px rgba(192,90,42,0.3)'
+                : '0 8px 24px rgba(201,160,99,0.25)',
+            }}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.6" width="32" height="32">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="9" y1="13" x2="15" y2="13"/>
+                <line x1="9" y1="17" x2="13" y2="17"/>
+              </svg>
+            </div>
+
+            <div style={{flex:1, minWidth:200}}>
+              <p style={{
+                fontFamily:'var(--font-mono)', fontSize:'10px',
+                letterSpacing:'0.18em', textTransform:'uppercase',
+                opacity:0.5, marginBottom:'6px',
+              }}>PDF · Product Catalogue</p>
+              <h3 style={{fontSize:'1.15rem', fontWeight:600, marginBottom:'6px'}}>
+                {p.name} — Full Catalogue
+              </h3>
+              <p style={{fontSize:'0.88rem', opacity:0.6, lineHeight:1.5}}>
+                {p.catalogue
+                  ? 'Grades, packaging options, certifications, pricing tiers, and export documentation — all in one document.'
+                  : 'Catalogue coming soon. Request a copy directly and our team will send it within 24 hours.'}
+              </p>
+            </div>
+
+            {p.catalogue ? (
+              <a
+                href={p.catalogue}
+                download
+                className="btn btn-primary btn-magnetic"
+                style={{flexShrink:0}}
+              >
+                Download PDF
+                <svg className="btn-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M8 3v8M5 8l3 3 3-3M3 13h10"/>
+                </svg>
+              </a>
+            ) : (
+              <Link href="/rfq" className="btn btn-primary btn-magnetic" style={{flexShrink:0}}>
+                Request Catalogue
+                <svg className="btn-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 13 13 3M6 3h7v7"/>
+                </svg>
+              </Link>
+            )}
           </div>
         </div>
       </section>

@@ -3,8 +3,8 @@ import { useState, FormEvent } from 'react';
 
 const products = ['Assam Orthodox Tea','Jute Products','Fox Nuts (Makhana)','Organic Jaggery','Moringa Powder','Cow Dung Eco Solutions','Food Essentials','Multiple / Custom'];
 const quantities = ['< 1 MT','1–5 MT','5–20 MT','20–100 MT','100+ MT'];
-const incoterms = ['FOB','CIF','CFR','EXW','DDP','Not Sure'];
-const payments = ['LC at Sight','30% Advance + 70% BL','TT in Advance','LC 60/90 Days','Open Account (repeat buyers)','Discuss'];
+const incoterms = ['FOB','CIF','CFR','EXW','Not Sure'];
+const payments = ['70% Advance + 30% on B/L','LC at Sight (Irrevocable)','Discuss'];
 
 export default function RFQPage() {
   const [status, setStatus] = useState<'idle'|'sending'|'ok'|'err'>('idle');

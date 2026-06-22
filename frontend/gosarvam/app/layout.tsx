@@ -39,8 +39,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               document.querySelectorAll('.r-up,.r-fade,.r-clip,.split-line').forEach(function(el){ io.observe(el); });
             }
             if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', observe); } else { observe(); }
-            // Re-run on route change for Next.js
-            var mo = new MutationObserver(function(){ observe(); });
+            // Debounced MutationObserver for Next.js route changes — avoids re-querying
+            // the entire DOM on every class addition / animation frame mutation.
+            var debTimer;
+            var mo = new MutationObserver(function(mutations){
+              for(var i=0;i<mutations.length;i++){
+                if(mutations[i].addedNodes.length){
+                  clearTimeout(debTimer);
+                  debTimer = setTimeout(observe, 120);
+                  return;
+                }
+              }
+            });
             mo.observe(document.body, { childList: true, subtree: true });
           })();
         `}</Script>

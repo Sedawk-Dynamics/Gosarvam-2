@@ -2,20 +2,21 @@
 
 import { useEffect, useRef } from 'react';
 
-// Floating seeds / grains — organic shapes drifting like spice particles in light
 export default function FloatingGeo() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let W = canvas.offsetWidth, H = canvas.offsetHeight;
     canvas.width = W; canvas.height = H;
 
-    // Seed colours — tea brown, jaggery amber, moringa green, makhana cream
     const palette = ['rgba(180,120,60,', 'rgba(201,160,99,', 'rgba(120,150,80,', 'rgba(210,185,130,', 'rgba(160,100,50,'];
 
     const COUNT = 55;
@@ -24,12 +25,12 @@ export default function FloatingGeo() {
       return {
         x: Math.random() * W,
         y: Math.random() * H,
-        rx: 2 + Math.random() * 5,   // ellipse x-radius (grain shape)
-        ry: 1 + Math.random() * 2.5, // ellipse y-radius
+        rx: 2 + Math.random() * 5,
+        ry: 1 + Math.random() * 2.5,
         rot: Math.random() * Math.PI,
         drot: (Math.random() - 0.5) * 0.008,
         vx: (Math.random() - 0.5) * 0.3,
-        vy: -0.15 - Math.random() * 0.25, // drift upward slowly
+        vy: -0.15 - Math.random() * 0.25,
         opacity: 0.15 + Math.random() * 0.25,
         col,
         sway: Math.random() * Math.PI * 2,
@@ -38,10 +39,15 @@ export default function FloatingGeo() {
     });
 
     let animId: number;
+    let visible = false;
+    let frameCount = 0;
+
     const draw = () => {
       animId = requestAnimationFrame(draw);
-      ctx.clearRect(0, 0, W, H);
+      if (!visible) return;
+      if (frameCount++ % 2 !== 0) return; // 30 fps — background decoration doesn't need 60
 
+      ctx.clearRect(0, 0, W, H);
       seeds.forEach(s => {
         s.sway += s.swaySpeed;
         s.vx = Math.sin(s.sway) * 0.25;
@@ -62,14 +68,21 @@ export default function FloatingGeo() {
         ctx.restore();
       });
     };
+
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.05 });
+    io.observe(canvas);
     draw();
 
     const onResize = () => {
       W = canvas.offsetWidth; H = canvas.offsetHeight;
       canvas.width = W; canvas.height = H;
     };
-    window.addEventListener('resize', onResize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', onResize); };
+    window.addEventListener('resize', onResize, { passive: true });
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', onResize);
+      io.disconnect();
+    };
   }, []);
 
   return (

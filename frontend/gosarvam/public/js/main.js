@@ -123,14 +123,18 @@
   const initLenis = () => {
     if (typeof Lenis === 'undefined') return;
     lenis = new Lenis({
-      duration: 1.25,
+      duration: 1.2,
       easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
       lerp: 0.1,
     });
     if (typeof gsap !== 'undefined' && gsap.ticker) {
-      lenis.on('scroll', () => ScrollTrigger?.update?.());
-      gsap.ticker.add((t) => lenis.raf(t * 1000));
+      // Only update ScrollTrigger when lenis actually scrolls (not every tick)
+      lenis.on('scroll', ScrollTrigger ? () => ScrollTrigger.update() : () => {});
+      // GSAP ticker time is in seconds; lenis.raf expects ms
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
       gsap.ticker.lagSmoothing(0);
     } else {
       const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
@@ -284,7 +288,7 @@
       nav.classList.toggle('scrolled', window.scrollY > 30);
     };
     onScroll();
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     // mobile drawer
     const burger = $('.nav-burger');
@@ -522,13 +526,14 @@
       });
     });
 
-    // Mouse parallax
+    // Mouse parallax — cache rect to avoid forced reflow on every mousemove
     let mx = 0, my = 0;
+    let cachedRect = mount.getBoundingClientRect();
+    window.addEventListener('resize', () => { cachedRect = mount.getBoundingClientRect(); }, { passive: true });
     mount.addEventListener('mousemove', e => {
-      const r = mount.getBoundingClientRect();
-      mx = ((e.clientX - r.left) / r.width - 0.5) * 0.6;
-      my = ((e.clientY - r.top) / r.height - 0.5) * 0.6;
-    });
+      mx = ((e.clientX - cachedRect.left) / cachedRect.width - 0.5) * 0.6;
+      my = ((e.clientY - cachedRect.top) / cachedRect.height - 0.5) * 0.6;
+    }, { passive: true });
 
     const clock = new THREE.Clock();
     let rafId;

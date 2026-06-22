@@ -48,7 +48,7 @@ export default function LogisticsPage() {
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:'2rem'}}>
             <div className="cert-card r-up" style={{padding:'2.5rem'}}>
               <h3 style={{fontFamily:'var(--serif)',marginBottom:'1.5rem'}}>Incoterms We Offer</h3>
-              {[['FOB','Free On Board — most common for sea freight. Risk transfers when goods cross ship rail.'],['CIF','Cost Insurance Freight — we arrange shipping and insurance to destination port.'],['CFR','Cost and Freight — we arrange freight; buyer arranges insurance.'],['EXW','Ex Works — available for large buyers with their own freight forwarder.'],['DDP','Delivered Duty Paid — we handle everything including destination customs.']].map(([t,d]) => (
+              {[['FOB','Free On Board — most common for sea freight. Risk transfers when goods cross ship rail.'],['CIF','Cost Insurance Freight — we arrange shipping and insurance to destination port.'],['CFR','Cost and Freight — we arrange freight; buyer arranges insurance.'],['EXW','Ex Works — available for large buyers with their own freight forwarder.']].map(([t,d]) => (
                 <div key={t} style={{marginBottom:'1.25rem',paddingBottom:'1.25rem',borderBottom:'1px solid var(--border)'}}>
                   <div style={{fontFamily:'var(--mono)',fontSize:'0.75rem',fontWeight:600,color:'var(--gold)',marginBottom:'0.25rem'}}>{t}</div>
                   <p style={{fontSize:'0.82rem',opacity:0.7,lineHeight:1.6}}>{d}</p>
@@ -57,7 +57,7 @@ export default function LogisticsPage() {
             </div>
             <div className="cert-card r-up" style={{padding:'2.5rem'}}>
               <h3 style={{fontFamily:'var(--serif)',marginBottom:'1.5rem'}}>Payment Methods</h3>
-              {[['LC at Sight','Letter of Credit (sight) via SWIFT — most secure for first-time buyers.'],['30% Advance + 70% BL','Common arrangement for repeat buyers with established relationship.'],['TT in Advance','Telegraphic transfer 100% advance accepted for small sample orders.'],['LC 60/90 Days','Usance LC available for large-volume, long-term contracts.'],['Open Account','Available after 3+ successful transactions and credit check.']].map(([t,d]) => (
+              {[['70% Advance + 30% on B/L','Standard term: 70% advance payment with Purchase Order; remaining 30% against copy of Bill of Lading before release.'],['LC at Sight (Irrevocable)','Irrevocable Letter of Credit at sight via SWIFT — we do not accept Usance / deferred-payment LCs.'],['No Credit Terms','We do not extend open credit or deferred-payment arrangements under any circumstances.']].map(([t,d]) => (
                 <div key={t} style={{marginBottom:'1.25rem',paddingBottom:'1.25rem',borderBottom:'1px solid var(--border)'}}>
                   <div style={{fontFamily:'var(--mono)',fontSize:'0.75rem',fontWeight:600,color:'var(--gold)',marginBottom:'0.25rem'}}>{t}</div>
                   <p style={{fontSize:'0.82rem',opacity:0.7,lineHeight:1.6}}>{d}</p>

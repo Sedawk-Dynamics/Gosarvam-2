@@ -13,7 +13,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
       initial={{ opacity: 0, x: 60 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.52, ease: [0.32, 0.72, 0, 1] }}
-      style={{ display: 'block' }}
+      style={{ display: 'block', touchAction: 'pan-y' }}
     >
       {children}
     </motion.div>

@@ -26,8 +26,8 @@ export default function MorphGlobe() {
     const group = new THREE.Group();
     scene.add(group);
 
-    // Point cloud sphere
-    const COUNT = 2200;
+    // Point cloud sphere — 600 points gives good density with 3× less per-frame CPU
+    const COUNT = 600;
     const R = 2;
     const positions = new Float32Array(COUNT * 3);
     const originalPos = new Float32Array(COUNT * 3);
@@ -102,13 +102,14 @@ export default function MorphGlobe() {
     group.add(new THREE.Mesh(haloGeo, haloMat));
 
     let t = 0, animId: number;
+    let visible = false;
     const posAttr = geo.attributes.position as THREE.BufferAttribute;
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
+      if (!visible || document.hidden) return;
       t += 0.007;
 
-      // Breathing morph: points expand/contract in waves
       for (let i = 0; i < COUNT; i++) {
         const ox = originalPos[i * 3];
         const oy = originalPos[i * 3 + 1];
@@ -127,6 +128,9 @@ export default function MorphGlobe() {
 
       renderer.render(scene, camera);
     };
+
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.05 });
+    io.observe(mount);
     animate();
 
     const onResize = () => {
@@ -135,10 +139,11 @@ export default function MorphGlobe() {
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
     };
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', onResize);
+      io.disconnect();
       if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
       renderer.dispose();
     };

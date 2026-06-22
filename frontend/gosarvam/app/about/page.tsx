@@ -32,8 +32,7 @@ export default function AboutPage() {
                 to bring all that is genuine, nourishing, and heritage-rooted in India to buyers who value quality over commodity.
               </p>
               <p className="r-up mt-s text-mute">
-                Registered in 2025 and headquartered in Assam, we operate with a lean, expert team that combines deep agricultural
-                knowledge with global trade expertise.
+                Registered in 2023 and headquartered in Assam, with a sub-office in Dholera, Gujarat, we operate with a lean, expert team that combines deep agricultural knowledge with global trade expertise.
               </p>
             </div>
           </div>
