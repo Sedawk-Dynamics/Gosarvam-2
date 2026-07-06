@@ -1220,15 +1220,16 @@ select.form-control { cursor: pointer; }
 }
 .foot-bottom a { color: rgba(255,255,255,0.45); transition: color .2s; }
 .foot-bottom a:hover { color: #fff; }
-.foot-bottom .socials { display: flex; gap: 10px; }
-.foot-bottom .socials a {
+.foot-bottom .socials { display: flex; align-items: center; gap: 10px; }
+.foot-bottom .designed-by { margin-right: 6px; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.foot-bottom .socials > a {
   width: 36px; height: 36px; border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.12);
   display: grid; place-items: center;
   color: rgba(255,255,255,0.45);
   transition: background .2s, color .2s, border-color .2s;
 }
-.foot-bottom .socials a:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.3); }
+.foot-bottom .socials > a:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.3); }
 .foot-bottom .socials svg { width: 15px; height: 15px; }
 
 /* Newsletter form in footer */

@@ -72,6 +72,7 @@ const PRODUCTS = [
 
 export default function Home() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [heroVideoReady, setHeroVideoReady] = useState(false);
 
   const toggle = (i: number) => setOpenIdx(openIdx === i ? null : i);
 
@@ -80,14 +81,29 @@ export default function Home() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <header className="hero">
         <div className="hero-bg">
-          {/* Hero video — nature/tea garden footage */}
-          <video
-            autoPlay muted loop playsInline
-            preload="metadata"
+          {/* Poster frame — shown instantly so the hero never looks empty while the video loads */}
+          <img
+            src="/images/hero-poster.jpg"
+            alt=""
+            aria-hidden="true"
             style={{
               position:'absolute', inset:0, width:'100%', height:'100%',
               objectFit:'cover', objectPosition:'center',
               zIndex:1,
+            }}
+          />
+          {/* Hero video — nature/tea garden footage */}
+          <video
+            autoPlay muted loop playsInline
+            preload="auto"
+            poster="/images/hero-poster.jpg"
+            onCanPlay={() => setHeroVideoReady(true)}
+            style={{
+              position:'absolute', inset:0, width:'100%', height:'100%',
+              objectFit:'cover', objectPosition:'center',
+              zIndex:1,
+              opacity: heroVideoReady ? 1 : 0,
+              transition: 'opacity 0.8s ease',
             }}
           >
             <source src="/videos/hero.mp4" type="video/mp4" />

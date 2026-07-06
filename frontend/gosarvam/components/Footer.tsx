@@ -107,13 +107,13 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="foot-bottom">
           <span>© 2026 Gosarvam Global LLP. All rights reserved.</span>
-          <span>
-            Designed by{' '}
-            <a href="https://webel.io/" target="_blank" rel="noopener noreferrer">
-              Webelio
-            </a>
-          </span>
           <div className="socials">
+            <span className="designed-by">
+              Designed by{' '}
+              <a href="https://webel.io/" target="_blank" rel="noopener noreferrer">
+                Webelio
+              </a>
+            </span>
             <a href="#" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
                 <path d="M4 4h4v16H4zM6 2a2 2 0 110 4 2 2 0 010-4zM10 8h4v2h.05a4 4 0 016.95 2.5V20h-4v-6.4c0-1.5-.6-2.4-2-2.4s-2 .9-2 2.4V20h-4z"/>
