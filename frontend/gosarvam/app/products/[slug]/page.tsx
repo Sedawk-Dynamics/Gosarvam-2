@@ -23,6 +23,7 @@ const catalog: Record<string, {
     specs: [['Origin','West Bengal & Assam, India'],['Fibre Grade','TD3 to TD6, Mestia'],['Products','Shopping bags, sacks, rugs, carpet backing, handicrafts'],['Min. Order','500 pieces or 1 MT fibre'],['Packaging','Bale / custom retail'],['Shelf Life','36 months stored dry'],['Certifications','FSSAI, Jute Mark, OEKO-TEX'],],
     grades: ['TD3 (Fine)','TD4','TD5','TD6 (Coarse)','Mestia Grade'],
     docs: ['Jute Mark Certificate','Phytosanitary Certificate','Quality Inspection Report'],
+    catalogue: '/catalogues/jute-catalogue.pdf',
   },
   'fox-nuts': {
     name: 'Fox Nuts (Makhana)',
@@ -42,6 +43,7 @@ const catalog: Record<string, {
     specs: [['Origin','Maharashtra & UP, India'],['Forms','Block, Granule, Powder, Liquid'],['Sucrose','~65–85%'],['Minerals','Iron, Calcium, Potassium, Magnesium'],['Min. Order','1 MT'],['Packaging','5 kg / 25 kg / 50 kg bags'],['Shelf Life','12 months'],['Certifications','FSSAI, Organic India, USDA Organic (select lots)'],],
     grades: ['A Grade (Golden)','B Grade (Dark)','Powdered','Liquid (Kakvi)'],
     docs: ['Organic Certificate','FSSAI License','Sugar Analysis Report','Phytosanitary'],
+    catalogue: '/catalogues/jaggery-catalogue.pdf',
   },
   'moringa': {
     name: 'Moringa Powder',
@@ -51,6 +53,7 @@ const catalog: Record<string, {
     specs: [['Origin','Andhra Pradesh & Tamil Nadu, India'],['Forms','Leaf powder, Seed oil, Capsules, Extract'],['Protein','~27g per 100g (dry)'],['Iron','~28mg per 100g'],['Min. Order','200 kg'],['Packaging','1 kg / 5 kg / 25 kg craft bags; capsule packs'],['Shelf Life','24 months'],['Certifications','FSSAI, USDA Organic, EU Organic'],],
     grades: ['A Grade (Bright Green)','B Grade','Seed Oil (Cold Pressed)'],
     docs: ['Organic Certificate (USDA & EU)','Heavy Metals Report','Microbiology Report','FSSAI License'],
+    catalogue: '/catalogues/moringa-catalogue.pdf',
   },
   'cow-dung': {
     name: 'Cow Dung Eco Solutions',
@@ -60,6 +63,7 @@ const catalog: Record<string, {
     specs: [['Origin','Assam & Gujarat, India'],['Products','Incense cakes, Dhoop sticks, Organic manure, Eco-pots, Sambhrani cups'],['Min. Order','500 units / 200 kg manure'],['Packaging','Retail-ready or bulk'],['Shelf Life','24+ months (incense/manure)'],['Certifications','FSSAI, Organic India'],],
     grades: ['Premium Incense Cakes','Dhoop Sticks (assorted)','Organic Granular Manure','Biodegradable Nursery Pots'],
     docs: ['Organic Certificate','Heavy Metals Report','Phytosanitary (manure)'],
+    catalogue: '/catalogues/cow-dung-catalogue.pdf',
   },
   'essentials': {
     name: 'Food Essentials',
@@ -100,12 +104,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <div className="section-tag"><span className="dot" /><span>Overview</span></div>
               <h2 className="r-up" style={{maxWidth:'20ch'}}>{p.name}</h2>
               <p className="lead r-up mt-m">{p.desc}</p>
-              <div className="row mt-m">
-                <Link href="/rfq" className="btn btn-primary btn-magnetic">
-                  Request Quotation
-                  <svg className="btn-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 13 13 3M6 3h7v7"/></svg>
-                </Link>
-              </div>
 
               {/* GRADES */}
               <div style={{marginTop:'2.5rem'}}>

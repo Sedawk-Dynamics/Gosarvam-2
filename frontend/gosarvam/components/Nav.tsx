@@ -35,7 +35,6 @@ export default function Nav() {
             <Link href="/"          className={a('/')}>Home</Link>
             <Link href="/about"     className={a('/about')}>About</Link>
             <Link href="/products"  className={a('/products')}>Products</Link>
-            <Link href="/catalogue" className={a('/catalogue')}>Catalogue</Link>
             <Link href="/logistics" className={a('/logistics')}>Logistics</Link>
             <Link href="/blog"      className={a('/blog')}>News</Link>
             <Link href="/contact"   className={a('/contact')}>Contact</Link>
@@ -64,7 +63,6 @@ export default function Nav() {
         <Link href="/">Home</Link>
         <Link href="/about">About</Link>
         <Link href="/products">Products</Link>
-        <Link href="/catalogue">Catalogue</Link>
         <Link href="/logistics">Logistics</Link>
         <Link href="/blog">News</Link>
         <Link href="/rfq">Request Quote</Link>

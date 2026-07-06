@@ -10,8 +10,9 @@ const path        = require('path');
 let sharp;
 try { sharp = require('sharp'); } catch { sharp = null; }
 
-const OUT  = path.join(__dirname, '../public/catalogues');
-const IMGS = 'C:\\Users\\yokes\\Downloads';
+const OUT    = path.join(__dirname, '../public/catalogues');
+const IMGS   = 'C:\\Users\\yokes\\Downloads';
+const PUBIMG = path.join(__dirname, '../public/images');
 
 // ── Gold palette ───────────────────────────────────────────────────────────────
 const GOLD      = '#C9A063';
@@ -86,6 +87,149 @@ const CATALOGUES = [
     ],
     certs: ['FSSAI License', 'AGMARK Grade A', 'Spices Board License', 'APEDA Certified', 'Phytosanitary Certificate', 'Organic Certificate (select lots)'],
     accent: '#C07830',
+  },
+  {
+    file:    'makhana-catalogue.pdf',
+    img:     path.join(PUBIMG, 'fox-nuts.png'),
+    title:   'Fox Nuts (Makhana)',
+    subtitle:'Superfood Snack · Vegan · Gluten-Free',
+    tag:     'PRODUCT CATALOGUE · 2025',
+    origin:  'Bihar, India',
+    about:
+      'Makhana — the puffed lotus seed — is a nutritional powerhouse. Low in fat, high in ' +
+      'protein and magnesium, it is taking global health-food markets by storm. Hand-sorted ' +
+      'and polished for a bright, uniform appearance, we supply plain, roasted, flavoured, ' +
+      'and flour forms.',
+    specs: [
+      ['Origin',         'Bihar, India'],
+      ['Varieties',      'Plain, Roasted, Flavoured, Flour'],
+      ['Protein',        '~9.7 g per 100g'],
+      ['Moisture',       'Max 12%'],
+      ['Min. Order',     '500 kg'],
+      ['Packaging',      '5 kg / 10 kg / 25 kg bags; retail pouches'],
+      ['Shelf Life',     '12 months sealed'],
+    ],
+    grades: [
+      ['Suta (Extra Large)', '6+ mm — premium size, exceptional puff'],
+      ['Lawa (Large)',       '5–6 mm — popular retail size'],
+      ['Samanya (Medium)',   '4–5 mm — everyday grade'],
+      ['Tikhi (Small)',      'Broken/small grade — used in flour & snacks'],
+    ],
+    certs: ['FSSAI License', 'Organic India Certified', 'APEDA Certified', 'Quality Analysis Report', 'Phytosanitary Certificate'],
+    accent: '#9C7A3C',
+  },
+  {
+    file:    'jute-catalogue.pdf',
+    img:     path.join(PUBIMG, 'jute-products.png'),
+    title:   'Jute Products',
+    subtitle:'Eco Fibre · Biodegradable · OEKO-TEX Certified',
+    tag:     'PRODUCT CATALOGUE · 2025',
+    origin:  'West Bengal & Assam, India',
+    about:
+      'Jute is nature\'s own fibre — 100% biodegradable, carbon-negative, and incredibly ' +
+      'versatile. Our jute range covers bags, sacks, carpet backing, rugs, and bespoke ' +
+      'handicrafts for retail and industrial buyers worldwide.',
+    specs: [
+      ['Origin',         'West Bengal & Assam, India'],
+      ['Fibre Grade',    'TD3 to TD6, Mestia'],
+      ['Products',       'Shopping bags, sacks, rugs, carpet backing, handicrafts'],
+      ['Min. Order',     '500 pieces or 1 MT fibre'],
+      ['Packaging',      'Bale / custom retail'],
+      ['Shelf Life',     '36 months stored dry'],
+    ],
+    grades: [
+      ['TD3',     'Fine grade fibre, premium finish'],
+      ['TD4',     'Standard fine grade'],
+      ['TD5',     'Medium coarse grade'],
+      ['TD6',     'Coarse grade, industrial use'],
+      ['Mestia',  'Bulk grade for sacking & carpet backing'],
+    ],
+    certs: ['FSSAI License', 'Jute Mark Certificate', 'OEKO-TEX Certified', 'Phytosanitary Certificate', 'Quality Inspection Report'],
+    accent: '#7A5C3E',
+  },
+  {
+    file:    'jaggery-catalogue.pdf',
+    img:     path.join(PUBIMG, 'jaggery.png'),
+    title:   'Organic Jaggery',
+    subtitle:'Natural Sweetener · No Chemicals · Mineral Rich',
+    tag:     'PRODUCT CATALOGUE · 2025',
+    origin:  'Maharashtra & Uttar Pradesh, India',
+    about:
+      'Made by the age-old tradition of boiling sugarcane juice in iron pans without any ' +
+      'chemicals, our jaggery retains its natural minerals and carries a deep, ' +
+      'caramel-molasses profile that refined sugar cannot replicate.',
+    specs: [
+      ['Origin',         'Maharashtra & UP, India'],
+      ['Forms',          'Block, Granule, Powder, Liquid'],
+      ['Sucrose',        '65% – 85%'],
+      ['Minerals',       'Iron, Calcium, Potassium, Magnesium'],
+      ['Min. Order',     '1 MT'],
+      ['Packaging',      '5 kg / 25 kg / 50 kg bags'],
+      ['Shelf Life',     '12 months'],
+    ],
+    grades: [
+      ['A Grade',        'Golden colour, premium quality, low impurities'],
+      ['B Grade',        'Dark colour, robust flavour'],
+      ['Powdered',       'Free-flowing granulated jaggery'],
+      ['Liquid (Kakvi)', 'Syrup form, used in confectionery'],
+    ],
+    certs: ['FSSAI License', 'Organic India Certified', 'USDA Organic (select lots)', 'Sugar Analysis Report', 'Phytosanitary Certificate'],
+    accent: '#A8721E',
+  },
+  {
+    file:    'moringa-catalogue.pdf',
+    img:     path.join(PUBIMG, 'moringa.png'),
+    title:   'Moringa Powder',
+    subtitle:'Superfood · Certified Organic · Nutrient Dense',
+    tag:     'PRODUCT CATALOGUE · 2025',
+    origin:  'Andhra Pradesh & Tamil Nadu, India',
+    about:
+      'The drumstick tree — Moringa oleifera — is one of the most nutrient-dense plants on ' +
+      'earth. Our moringa leaves are shade-dried at low temperature and stone-milled to ' +
+      'preserve maximum nutritional value.',
+    specs: [
+      ['Origin',         'Andhra Pradesh & Tamil Nadu, India'],
+      ['Forms',          'Leaf powder, Seed oil, Capsules, Extract'],
+      ['Protein',        '~27 g per 100g (dry)'],
+      ['Iron',           '~28 mg per 100g'],
+      ['Min. Order',     '200 kg'],
+      ['Packaging',      '1 kg / 5 kg / 25 kg craft bags; capsule packs'],
+      ['Shelf Life',     '24 months'],
+    ],
+    grades: [
+      ['A Grade',   'Bright green colour, premium leaf powder'],
+      ['B Grade',   'Standard grade leaf powder'],
+      ['Seed Oil',  'Cold pressed, pharmaceutical/cosmetic grade'],
+    ],
+    certs: ['FSSAI License', 'USDA Organic', 'EU Organic Certified', 'Heavy Metals Report', 'Microbiology Report'],
+    accent: '#4A6741',
+  },
+  {
+    file:    'cow-dung-catalogue.pdf',
+    img:     path.join(PUBIMG, 'cow-dung.png'),
+    title:   'Cow Dung Eco Solutions',
+    subtitle:'Sacred Eco · Vedic Products · Sustainable Sourcing',
+    tag:     'PRODUCT CATALOGUE · 2025',
+    origin:  'Assam & Gujarat, India',
+    about:
+      'Rooted in Vedic tradition and reimagined for modern sustainability, our cow dung ' +
+      'product range covers natural incense, organic fertiliser, biodegradable pots, and ' +
+      'ritual dhoop sticks — each crafted by artisan cooperatives.',
+    specs: [
+      ['Origin',         'Assam & Gujarat, India'],
+      ['Products',       'Incense cakes, Dhoop sticks, Organic manure, Eco-pots, Sambhrani cups'],
+      ['Min. Order',     '500 units / 200 kg manure'],
+      ['Packaging',      'Retail-ready or bulk'],
+      ['Shelf Life',     '24+ months (incense/manure)'],
+    ],
+    grades: [
+      ['Premium Incense Cakes',        'Hand-rolled, slow burning, natural fragrance'],
+      ['Dhoop Sticks',                 'Assorted fragrances, traditional recipes'],
+      ['Organic Granular Manure',      'Nutrient-rich soil conditioner'],
+      ['Biodegradable Nursery Pots',   'Eco-friendly planting pots'],
+    ],
+    certs: ['FSSAI License', 'Organic India Certified', 'Heavy Metals Report', 'Phytosanitary Certificate (manure)'],
+    accent: '#6B4423',
   },
 ];
 
@@ -264,78 +408,6 @@ async function makePDF(cfg) {
      .text('trade@gosarvamglobal.com  ·  gosarvamglobal.com  ·  Assam, India', 36, H - 21);
   doc.font('Helvetica').fontSize(7).fillColor('rgba(255,255,255,0.25)')
      .text('02', W - 44, H - 21);
-
-  // ── PAGE 3: Contact & Request ──────────────────────────────────────────────
-  doc.addPage();
-  doc.rect(0, 0, W, H).fill(INK);
-  doc.rect(0, 0, W, 4).fill(GOLD);
-  doc.rect(0, 0, 4, H).fill(cfg.accent);
-
-  // Large subtle brand watermark
-  doc.font('Helvetica-Bold').fontSize(80).fillColor('rgba(255,255,255,0.04)')
-     .text('GG', 60, H / 2 - 60);
-
-  doc.font('Helvetica').fontSize(8).fillColor(GOLD)
-     .text('GOSARVAM GLOBAL', 36, 36, { characterSpacing: 3 });
-
-  doc.font('Helvetica-Bold').fontSize(28).fillColor(WHITE)
-     .text('Ready to Order?', 36, 72, { width: W - 72 });
-  doc.font('Helvetica').fontSize(13).fillColor('rgba(255,255,255,0.55)')
-     .text('Tell us your volume, destination port, and packaging needs.\nWe respond within 24 business hours with a full proposal.', 36, 118, { width: W - 72, lineGap: 4 });
-
-  // CTA box
-  const ctaY = 200;
-  doc.rect(36, ctaY, W - 72, 120).fill('#1A1A1A').stroke(cfg.accent).lineWidth(0.8);
-
-  doc.font('Helvetica-Bold').fontSize(9).fillColor(GOLD)
-     .text('HOW TO PLACE AN ORDER', 54, ctaY + 20, { characterSpacing: 1.5 });
-
-  const steps = [
-    'Submit an RFQ at gosarvamglobal.com/rfq',
-    'Receive a proposal with pricing, MOQ & lead times',
-    'Confirm — we begin sourcing & documentation',
-  ];
-  steps.forEach((step, i) => {
-    doc.circle(54, ctaY + 50 + i * 26 + 4.5, 9).fill(cfg.accent);
-    doc.font('Helvetica-Bold').fontSize(9).fillColor(WHITE)
-       .text(String(i + 1), 50.5, ctaY + 46 + i * 26, { width: 8, align: 'center' });
-    doc.font('Helvetica').fontSize(10).fillColor('rgba(255,255,255,0.7)')
-       .text(step, 72, ctaY + 44 + i * 26, { width: W - 120 });
-  });
-
-  // Contact details grid
-  const infoY = ctaY + 148;
-  doc.font('Helvetica-Bold').fontSize(8).fillColor('rgba(255,255,255,0.35)')
-     .text('CONTACT', 36, infoY, { characterSpacing: 2 });
-
-  const contacts = [
-    ['Email',   'trade@gosarvamglobal.com'],
-    ['Website', 'gosarvamglobal.com'],
-    ['Phone',   '+91 99999 99999'],
-    ['Address', 'Gosarvam Global LLP, Assam, India'],
-  ];
-  contacts.forEach(([label, val], i) => {
-    const cx = i < 2 ? 36 : (W / 2) + 18;
-    const cy = infoY + 18 + (i % 2) * 36;
-    doc.font('Helvetica').fontSize(7).fillColor('rgba(255,255,255,0.4)')
-       .text(label.toUpperCase(), cx, cy, { characterSpacing: 1 });
-    doc.font('Helvetica-Bold').fontSize(10).fillColor(WHITE)
-       .text(val, cx, cy + 11, { width: W / 2 - 54 });
-  });
-
-  // Gold CTA button-style box
-  const btnY = H - 160;
-  doc.rect(36, btnY, W - 72, 52).fill(GOLD);
-  doc.font('Helvetica-Bold').fontSize(12).fillColor(INK)
-     .text('REQUEST A QUOTATION →  gosarvamglobal.com/rfq', 36, btnY + 16, { align: 'center', width: W - 72, characterSpacing: 0.5 });
-
-  // Footer
-  doc.rect(0, H - 70, W, 70).fill('#090909');
-  doc.moveTo(36, H - 70).lineTo(W - 36, H - 70).stroke(cfg.accent).lineWidth(0.5).opacity(0.4);
-  doc.opacity(1).font('Helvetica').fontSize(7).fillColor('rgba(255,255,255,0.2)')
-     .text('This catalogue is for trade reference only. Prices and availability subject to change. © 2025 Gosarvam Global LLP', 36, H - 52, { width: W - 72, align: 'center' });
-  doc.font('Helvetica').fontSize(7).fillColor('rgba(255,255,255,0.15)')
-     .text('03', W - 44, H - 25);
 
   return doc;
 }
