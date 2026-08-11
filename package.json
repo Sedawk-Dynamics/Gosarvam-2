@@ -1,0 +1,35 @@
+{
+  "name": "gosarvam",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "gen:logo": "node scripts/gen-logo.cjs",
+    "gen:catalogues": "node scripts/gen-catalogues.cjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "gsap": "^3.15.0",
+    "lottie-react": "^2.4.1",
+    "motion": "^12.40.0",
+    "next": "16.2.9",
+    "nodemailer": "^6.9.13",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-simple-maps": "^3.0.0",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "pdfkit": "^0.19.1",
+    "sharp": "^0.35.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
