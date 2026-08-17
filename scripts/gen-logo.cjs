@@ -1,55 +1,66 @@
 // Gosarvam Global — Logo Asset Generator
-// Run: node scripts/gen-logo.cjs
+// Run: npm run gen:logo   (node scripts/gen-logo.cjs)
 //
-// Derives the web-ready logo assets from the master PNG (cream art on a solid
-// black plate). Alpha is taken from luminance rather than a colour key, so the
-// antialiased edges of the knotwork survive the knockout cleanly.
+// Derives every web logo asset from the full-colour master in
+// public/images/logo-master.png.
+//
+// Why a flood fill and not a colour key: white is a FUNCTIONAL colour in this
+// mark — the gap inside the yellow frame, the octagram, and the counters of the
+// green knot are all white. Keying out white would punch holes through the
+// middle of the emblem and let the dark nav show through. So instead we flood
+// fill inward from the image border and clear only background that is actually
+// reachable from outside, which leaves every interior white intact.
 'use strict';
 
 const sharp = require('sharp');
 const path  = require('path');
 const fs    = require('fs');
 
-const SRC    = 'C:\\Users\\yokes\\Downloads\\logo png.png';
-const PUBIMG = path.join(__dirname, '../public/images');
+const PUB    = path.join(__dirname, '../public');
+const PUBIMG = path.join(PUB, 'images');
 const APP    = path.join(__dirname, '../app');
+const SRC    = path.join(PUBIMG, 'logo-master.png');
 
-const THRESH = 28;   // luma above this counts as artwork, not plate
-const INK    = 0x11; // favicon plate — matches --bg-dark
+const BG_MIN = 244;  // channel value at or above which a pixel counts as background
+const PLATE  = '#ffffff';  // favicon plate — the mark is drawn for white
 
 (async () => {
-  const { data, info } = await sharp(SRC).ensureAlpha().raw()
+  const { data, info } = await sharp(SRC)
+    .flatten({ background: PLATE })   // master has an alpha channel; settle it on white
+    .ensureAlpha()
+    .raw()
     .toBuffer({ resolveWithObject: true });
   const { width: W, height: H } = info;
+  const px = Buffer.from(data);
 
-  // ── Luminance map + brand colour sample ─────────────────────────────────────
-  const luma = new Uint8Array(W * H);
-  let cream = [255, 255, 255], best = -1;
-  for (let i = 0, p = 0; i < W * H; i++, p += 4) {
-    const l = (data[p] * 299 + data[p + 1] * 587 + data[p + 2] * 114) / 1000;
-    luma[i] = l;
-    if (l > best) { best = l; cream = [data[p], data[p + 1], data[p + 2]]; }
+  const isBg = i => px[i * 4] >= BG_MIN && px[i * 4 + 1] >= BG_MIN && px[i * 4 + 2] >= BG_MIN;
+
+  // ── Clear background reachable from the border, preserving interior white ───
+  const outside = new Uint8Array(W * H);
+  const stack = [];
+  for (let x = 0; x < W; x++) { stack.push(x, (H - 1) * W + x); }
+  for (let y = 0; y < H; y++) { stack.push(y * W, y * W + W - 1); }
+  while (stack.length) {
+    const i = stack.pop();
+    if (outside[i] || !isBg(i)) continue;
+    outside[i] = 1;
+    const x = i % W, y = (i - x) / W;
+    if (x > 0)     stack.push(i - 1);
+    if (x < W - 1) stack.push(i + 1);
+    if (y > 0)     stack.push(i - W);
+    if (y < H - 1) stack.push(i + W);
   }
-  console.log('brand cream:', '#' + cream.map(v => v.toString(16).padStart(2, '0')).join(''));
+  let cleared = 0;
+  for (let i = 0; i < W * H; i++) if (outside[i]) { px[i * 4 + 3] = 0; cleared++; }
+  console.log(`cleared ${(cleared / (W * H) * 100).toFixed(1)}% as background; interior white preserved`);
 
-  const bbox = (y0, y1) => {
-    let x1 = W, y1b = H, x2 = -1, y2 = -1;
-    for (let y = y0; y < y1; y++) for (let x = 0; x < W; x++) {
-      if (luma[y * W + x] > THRESH) {
-        if (x < x1) x1 = x; if (x > x2) x2 = x;
-        if (y < y1b) y1b = y; if (y > y2) y2 = y;
-      }
-    }
-    return { left: x1, top: y1b, width: x2 - x1 + 1, height: y2 - y1b + 1 };
+  // ── Bounding boxes: emblem above the gutter, wordmark below ────────────────
+  const rowHasArt = y => {
+    for (let x = 0; x < W; x++) if (!outside[y * W + x]) return true;
+    return false;
   };
-
-  // ── Split emblem from wordmark at the widest blank row-run ──────────────────
   const rows = [];
-  for (let y = 0; y < H; y++) {
-    let on = false;
-    for (let x = 0; x < W; x++) if (luma[y * W + x] > THRESH) { on = true; break; }
-    rows.push(on);
-  }
+  for (let y = 0; y < H; y++) rows.push(rowHasArt(y));
   const first = rows.indexOf(true), last = rows.lastIndexOf(true);
   let split = last, run = 0, bestRun = 0;
   for (let y = first; y <= last; y++) {
@@ -58,27 +69,45 @@ const INK    = 0x11; // favicon plate — matches --bg-dark
   }
   console.log(`art rows ${first}-${last}; gutter ${bestRun}px at y=${split}`);
 
+  const bbox = (y0, y1) => {
+    let x1 = W, y1b = H, x2 = -1, y2 = -1;
+    for (let y = y0; y < y1; y++) for (let x = 0; x < W; x++) {
+      if (!outside[y * W + x]) {
+        if (x < x1) x1 = x; if (x > x2) x2 = x;
+        if (y < y1b) y1b = y; if (y > y2) y2 = y;
+      }
+    }
+    return { left: x1, top: y1b, width: x2 - x1 + 1, height: y2 - y1b + 1 };
+  };
   const emblem = bbox(first, split);
   const lockup = bbox(first, last + 1);
   console.log('emblem:', emblem, '\nlockup:', lockup);
 
-  // ── Knock out the plate: keep the cream, alpha from luma ────────────────────
-  const art = Buffer.alloc(W * H * 4);
-  for (let i = 0, p = 0; i < W * H; i++, p += 4) {
-    art[p] = cream[0]; art[p + 1] = cream[1]; art[p + 2] = cream[2];
-    art[p + 3] = Math.min(255, Math.round(luma[i] * 1.06)); // push solids to full opacity
-  }
-  const base = () => sharp(art, { raw: { width: W, height: H, channels: 4 } });
+  const base = () => sharp(px, { raw: { width: W, height: H, channels: 4 } });
+  const clear = { r: 0, g: 0, b: 0, alpha: 0 };
 
   // Pad the emblem crop to a square so it centres predictably at any CSS size.
+  // This must be materialised to a buffer before any resize: sharp applies
+  // extend AFTER resize within one pipeline, which would pad the scaled image
+  // and make the result non-square.
   const side = Math.max(emblem.width, emblem.height);
   const lr = Math.round((side - emblem.width) / 2);
   const tb = Math.round((side - emblem.height) / 2);
-  const pad = { left: lr, right: side - emblem.width - lr, top: tb, bottom: side - emblem.height - tb };
-  const clear = { r: 0, g: 0, b: 0, alpha: 0 };
-  const squareEmblem = () => base().extract(emblem).extend({ ...pad, background: clear });
+  const squareBuf = await base().extract(emblem)
+    .extend({
+      left: lr, right: side - emblem.width - lr,
+      top: tb, bottom: side - emblem.height - tb,
+      background: clear,
+    })
+    .png().toBuffer();
+  {
+    const m = await sharp(squareBuf).metadata();
+    if (m.width !== m.height) throw new Error(`square emblem is ${m.width}x${m.height}`);
+    console.log(`square emblem: ${m.width}x${m.height}`);
+  }
+  const squareEmblem = () => sharp(squareBuf);
 
-  // 1 — transparent emblem for nav + footer
+  // 1 — transparent colour emblem for nav + footer
   await squareEmblem().resize(512, 512).png({ compressionLevel: 9 })
     .toFile(path.join(PUBIMG, 'logo-mark.png'));
 
@@ -86,22 +115,26 @@ const INK    = 0x11; // favicon plate — matches --bg-dark
   await base().extract(lockup).resize({ width: 1024 }).png({ compressionLevel: 9 })
     .toFile(path.join(PUBIMG, 'logo-lockup.png'));
 
-  // 3 — favicons: emblem on an ink plate, so it reads in light and dark tab bars
+  // 3 — icons on a white plate: the mark is drawn for white, and a white tile
+  //     stays legible in both light and dark browser chrome.
   const plate = async (size, inset) => {
     const mark = await squareEmblem().resize(size - inset * 2, size - inset * 2).png().toBuffer();
-    return sharp({ create: { width: size, height: size, channels: 4,
-      background: { r: INK, g: INK, b: INK, alpha: 1 } } })
+    return sharp({ create: { width: size, height: size, channels: 4, background: PLATE } })
       .composite([{ input: mark, top: inset, left: inset }])
       .png({ compressionLevel: 9 });
   };
-  await (await plate(512, 54)).toFile(path.join(APP, 'icon.png'));
-  await (await plate(180, 19)).toFile(path.join(APP, 'apple-icon.png'));
+  await (await plate(512, 26)).toFile(path.join(APP, 'icon.png'));
+  await (await plate(180, 10)).toFile(path.join(APP, 'apple-icon.png'));
 
-  // 4 — favicon.ico, so /favicon.ico still resolves for crawlers and old clients.
-  // Entries are PNG-encoded, which every browser since IE11 reads.
+  // Manifest icons — Google reads these for the search-result icon, Android for
+  // the home-screen icon. Both want square 192 and 512.
+  await (await plate(192, 10)).toFile(path.join(PUB, 'icon-192.png'));
+  await (await plate(512, 26)).toFile(path.join(PUB, 'icon-512.png'));
+
+  // 4 — favicon.ico so /favicon.ico still resolves for crawlers and old clients.
   const sizes = [16, 32, 48, 256];
   const pngs = [];
-  for (const s of sizes) pngs.push(await (await plate(s, Math.max(1, Math.round(s * 0.105)))).toBuffer());
+  for (const s of sizes) pngs.push(await (await plate(s, Math.max(1, Math.round(s * 0.05)))).toBuffer());
   const header = Buffer.alloc(6);
   header.writeUInt16LE(0, 0); header.writeUInt16LE(1, 2); header.writeUInt16LE(sizes.length, 4);
   const dir = Buffer.alloc(16 * sizes.length);
@@ -119,10 +152,11 @@ const INK    = 0x11; // favicon plate — matches --bg-dark
   fs.writeFileSync(path.join(APP, 'favicon.ico'), Buffer.concat([header, dir, ...pngs]));
 
   console.log('\nwrote:');
-  for (const f of [[PUBIMG, 'logo-mark.png'], [PUBIMG, 'logo-lockup.png'],
-                   [APP, 'icon.png'], [APP, 'apple-icon.png']]) {
-    const m = await sharp(path.join(...f)).metadata();
-    console.log(`  ${f[1].padEnd(18)} ${m.width}x${m.height}`);
+  for (const [d, f] of [[PUBIMG,'logo-mark.png'], [PUBIMG,'logo-lockup.png'],
+                        [APP,'icon.png'], [APP,'apple-icon.png'],
+                        [PUB,'icon-192.png'], [PUB,'icon-512.png']]) {
+    const m = await sharp(path.join(d, f)).metadata();
+    console.log(`  ${f.padEnd(18)} ${m.width}x${m.height}`);
   }
-  console.log(`  favicon.ico        ${sizes.join('/')} @ ${fs.statSync(path.join(APP, 'favicon.ico')).size}b`);
+  console.log(`  favicon.ico        ${sizes.join('/')} @ ${fs.statSync(path.join(APP,'favicon.ico')).size}b`);
 })();
