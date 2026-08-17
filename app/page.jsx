@@ -68,6 +68,14 @@ const PRODUCTS = [
     desc: 'Turmeric from Erode. Basmati from Punjab. Coconut oil from Kerala. The full depth of the Indian pantry — spices, pulses, grains, and cold-pressed oils — graded for global export.',
     points: ['Turmeric, Cumin, Coriander, Basmati, Toor Dal, Mustard Oil', 'Min. order 500 kg per SKU · retail to IBC packaging', 'FSSAI, AGMARK, Spices Board certified'],
   },
+  {
+    num: '08',
+    slug: 'psyllium-husk',
+    name: 'Psyllium Husk (Isabgol)',
+    sub: 'Soluble Fibre · Pharma & Nutraceutical Grade',
+    desc: 'The husk of Plantago ovata from the arid belt of North Gujarat and Rajasthan — the most concentrated gel-forming soluble fibre in commercial use. Milled to 98–99.5% purity with swell volume tested per lot.',
+    points: ['95% / 98% / 99% / 99.5% purity · swell volume ≥ 40 ml/g', 'Min. order 1 MT husk / 500 kg powder · 40–100 mesh', 'FSSAI, ISO 22000, USDA & EU Organic (select lots)'],
+  },
 ];
 
 export default function Home() {
@@ -133,7 +141,7 @@ export default function Home() {
 
               <div className="export-strip">
                 <span className="lbl">What we export</span>
-                {[['assam-tea','Assam Tea'],['jute','Jute'],['fox-nuts','Fox Nuts'],['jaggery','Jaggery'],['moringa','Moringa'],['cow-dung','Eco Solutions'],['essentials','Food Essentials']].map(([s,n]) => (
+                {[['assam-tea','Assam Tea'],['jute','Jute'],['fox-nuts','Fox Nuts'],['jaggery','Jaggery'],['moringa','Moringa'],['cow-dung','Eco Solutions'],['essentials','Food Essentials'],['psyllium-husk','Psyllium Husk']].map(([s,n]) => (
                   <Link key={s} href={`/products/${s}`} className="export-chip">
                     <span className="dot" />{n}
                   </Link>
@@ -174,8 +182,8 @@ export default function Home() {
       {/* ── MARQUEE ──────────────────────────────────────────── */}
       <div className="marquee">
         <div className="marquee-track">
-          {['Assam Tea','Jute Products','Fox Nuts','Jaggery','Moringa Powder','Eco Solutions','Food Essentials',
-            'Assam Tea','Jute Products','Fox Nuts','Jaggery','Moringa Powder','Eco Solutions','Food Essentials'].map((t, i) => (
+          {['Assam Tea','Jute Products','Fox Nuts','Jaggery','Moringa Powder','Eco Solutions','Food Essentials','Psyllium Husk',
+            'Assam Tea','Jute Products','Fox Nuts','Jaggery','Moringa Powder','Eco Solutions','Food Essentials','Psyllium Husk'].map((t, i) => (
             <span key={i} className={`marquee-item${i%2===1?' it':''}`}>{t}</span>
           ))}
         </div>

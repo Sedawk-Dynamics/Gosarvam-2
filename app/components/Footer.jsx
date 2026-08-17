@@ -56,6 +56,7 @@ export default function Footer() {
               <li><Link href="/products/moringa">Moringa</Link></li>
               <li><Link href="/products/cow-dung">Eco Solutions</Link></li>
               <li><Link href="/products/essentials">Food Essentials</Link></li>
+              <li><Link href="/products/psyllium-husk">Psyllium Husk</Link></li>
             </ul>
           </div>
 

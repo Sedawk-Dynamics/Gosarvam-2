@@ -9,12 +9,13 @@ const CinematicOverlay = dynamic(() => import('./CinematicOverlay'), { ssr: fals
 
 const ITEMS = [
   { slug: 'assam-tea',  img: '/images/assam-tea.png',       video: '/videos/assam-tea.mp4', grad: '#3d5a2a', glow: '139,20,20',   tag: '01 · Premium Tea', name: 'Assam Orthodox Tea',   desc: 'Hand-plucked black tea from the misty estates of Upper Assam.' },
-  { slug: 'jute',       img: '/images/jute-products.png',   video: undefined,          grad: '#7a5a3a', glow: '120,100,55',  tag: '02 · Eco Fibre',   name: 'Jute Products',         desc: 'Biodegradable jute bags, sacks, and rugs — the golden fibre of Bengal.' },
+  { slug: 'jute',       img: '/images/jute-products.png',   video: '/videos/jute.mp4', grad: '#7a5a3a', glow: '120,100,55',  tag: '02 · Eco Fibre',   name: 'Jute Products',         desc: 'Biodegradable jute bags, sacks, and rugs — the golden fibre of Bengal.' },
   { slug: 'fox-nuts',   img: '/images/fox-nuts.png',        video: '/videos/fox-nuts.mp4', grad: '#c09a5a', glow: '220,210,190', tag: '03 · Superfood',   name: 'Fox Nuts (Makhana)',    desc: 'Hand-roasted lotus seeds — protein-rich, gluten-free, globally loved.' },
   { slug: 'jaggery',    img: '/images/jaggery.png',         video: '/videos/jaggery.mp4',  grad: '#c07830', glow: '212,143,56',  tag: '04 · Sweetener',   name: 'Organic Jaggery',       desc: 'Unrefined sugarcane jaggery — mineral-rich, chemical-free.' },
   { slug: 'moringa',    img: '/images/moringa.png',         video: '/videos/moringa.mp4',  grad: '#5a7a38', glow: '80,140,50',   tag: '05 · Superfood',   name: 'Moringa Powder',        desc: 'The miracle leaf, sun-dried and stone-milled.' },
-  { slug: 'cow-dung',   img: '/images/cow-dung.png',        video: undefined,          grad: '#7a5a3a', glow: '140,110,70',  tag: '06 · Sacred Eco',  name: 'Eco Solutions',         desc: 'Vedic incense, organic manure, eco-pots — ancestral materials reimagined.' },
+  { slug: 'cow-dung',   img: '/images/cow-dung.png',        video: '/videos/cow-dung.mp4', grad: '#7a5a3a', glow: '140,110,70',  tag: '06 · Sacred Eco',  name: 'Eco Solutions',         desc: 'Vedic incense, organic manure, eco-pots — ancestral materials reimagined.' },
   { slug: 'essentials', img: '/images/food-essentials.png', video: undefined,          grad: '#c05a2a', glow: '200,90,42',   tag: '07 · Pantry',      name: 'Food Essentials',       desc: 'Pulses, spices, grains, oils — export-graded Indian pantry.' },
+  { slug: 'psyllium-husk', img: '/images/psyllium-husk.png', video: undefined,         grad: '#c9a063', glow: '201,160,99',  tag: '08 · Soluble Fibre', name: 'Psyllium Husk (Isabgol)', desc: 'The husk of Plantago ovata — gel-forming soluble fibre at 99% purity.' },
 ];
 
 const N     = ITEMS.length;
