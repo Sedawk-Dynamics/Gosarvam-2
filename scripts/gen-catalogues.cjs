@@ -413,11 +413,22 @@ async function makePDF(cfg) {
 }
 
 // ── Generate ──────────────────────────────────────────────────────────────────
+// Real catalogues supplied by the client. These are NOT generated — listing a
+// file here stops this script from overwriting it with the placeholder design.
+// Remove an entry only if you want the generated version back.
+const SUPPLIED = new Set([
+  'makhana-catalogue.pdf',
+]);
+
 if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });
 
 (async () => {
   for (const cfg of CATALOGUES) {
     const outPath = path.join(OUT, cfg.file);
+    if (SUPPLIED.has(cfg.file)) {
+      console.log(`· ${cfg.file}  (skipped — client-supplied, not overwritten)`);
+      continue;
+    }
     const doc = await makePDF(cfg);
     await new Promise((resolve, reject) => {
       const stream = fs.createWriteStream(outPath);
