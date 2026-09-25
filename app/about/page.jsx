@@ -1,4 +1,5 @@
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function AboutPage() {
@@ -39,6 +40,56 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* FOUNDER */}
+      <section id="founder">
+        <div className="wrap">
+          <div className="story-grid">
+            <div className="story-image r-up">
+              <Image
+                src="/images/founder-nilutpal.png"
+                alt="Nilutpal, Managing Partner & Marketing Head, Gosarvam Global LLP"
+                fill
+                sizes="(max-width: 980px) 100vw, 50vw"
+                style={{objectPosition:'center top'}}
+              />
+              <div className="cap"><span>Nilutpal</span><span>Managing Partner</span></div>
+            </div>
+            <div>
+              <div className="section-tag"><span className="dot" /><span>Meet the Founder</span></div>
+              <h2 className="r-up">From sales executive to <span className="italic-serif">entrepreneur.</span></h2>
+              <p className="lead r-up mt-m">
+                My career began in 2015 on the frontlines of sales. Across years in the private sector, I learned that sustainable
+                growth isn&apos;t just about hitting targets — it&apos;s about building trust, understanding customer needs, and
+                delivering genuine value.
+              </p>
+              <p className="r-up mt-s text-mute">
+                In 2022, driven by a vision to build something with lasting impact, I co-founded Gosarvam Global LLP alongside my
+                brother. Our goal is simple: connect India&apos;s agricultural heritage with global demand.
+              </p>
+              <p className="r-up mt-s text-mute">
+                Today, we create international opportunities for local farmers and rural producers by exporting premium natural products:
+              </p>
+              <ul className="r-up mt-s text-mute" style={{paddingLeft:'1.2rem',lineHeight:1.9}}>
+                <li>Tea &amp; Mushrooms</li>
+                <li>Fox Nuts (Makhana)</li>
+                <li>Moringa Powder</li>
+                <li>Value-Added Agricultural Products</li>
+              </ul>
+              <blockquote className="r-up mt-m" style={{borderLeft:'2px solid var(--gold)',paddingLeft:'1.25rem',margin:'32px 0 0'}}>
+                <p style={{fontFamily:'var(--font-serif)',fontStyle:'italic',fontSize:'1.2rem',lineHeight:1.5}}>
+                  &ldquo;Success is not just about earning profits. It is about creating opportunities, building trust, and making a
+                  positive impact on society.&rdquo;
+                </p>
+                <footer className="mt-s">
+                  <strong>— Nilutpal</strong>
+                  <span className="text-mute" style={{display:'block',fontSize:'0.85rem'}}>Managing Partner &amp; Marketing Head, Gosarvam Global LLP</span>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* VISION MISSION */}
       <section id="vision" style={{background:'var(--bg-alt)'}}>
         <div className="wrap">
@@ -69,28 +120,6 @@ export default function AboutPage() {
                 eco-conscious packaging, and uncompromising quality — delivered on time, every time.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section>
-        <div className="wrap">
-          <div className="section-tag"><span className="dot" /><span>The People</span></div>
-          <h2 className="r-up" style={{maxWidth:'20ch'}}>Led by people who <span className="italic-serif">know the field.</span></h2>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'2rem',marginTop:'3rem'}}>
-            {[
-              {name:'Founder & Director',role:'Export Strategy · Trade Relations',bg:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=85'},
-              {name:'Head of Sourcing',role:'Agricultural Procurement · Quality',bg:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=85'},
-              {name:'Logistics Head',role:'Shipping · Documentation · Customs',bg:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=85'},
-              {name:'Quality Officer',role:'Lab Testing · Certification · Compliance',bg:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=85'},
-            ].map((m,i) => (
-              <div key={i} className="cert-card r-up" style={{textAlign:'center',padding:'2rem 1.5rem'}}>
-                <div style={{width:'80px',height:'80px',borderRadius:'50%',margin:'0 auto 1rem',backgroundImage:`url('${m.bg}')`,backgroundSize:'cover',backgroundPosition:'center',border:'2px solid var(--gold)'}} />
-                <h4 style={{marginBottom:'0.25rem'}}>{m.name}</h4>
-                <p className="text-mute" style={{fontSize:'0.8rem'}}>{m.role}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
